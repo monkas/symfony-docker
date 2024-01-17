@@ -4,12 +4,8 @@ services:
     image: mysql:8.2
     container_name: mysql-db
     restart: on-failure
-    environment:
-      MYSQL_ROOT_PASSWORD: db_user_root_pass
-      MYSQL_USER: db_user
-      MYSQL_PASSWORD: db_user_pass
-      MYSQL_DATABASE: app_db
-      #MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    env_file:
+      - .env
     volumes:
       - dbdata:/var/lib/mysql
     ports:
@@ -35,6 +31,8 @@ services:
     env_file:
       - .env
     user: 1000:1000
+    depends_on:
+      - redis
 
   nginx:
     image: nginx:1.25.3-alpine
@@ -50,7 +48,28 @@ services:
       - php
 
     # Switch to debug mode:
-    #command: [ nginx-debug, '-g', 'dlemon off;' ]
+    # command: [ nginx-debug, '-g', 'dlemon off;' ]
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis-cache
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - cache:/data
+
+    # save data every 20 seconds if at least 1 key changed
+    # Double dollars, so that the variable is not expanded by Docker Compose
+    # Surround by quotes, so that the shell does not split the password
+    command:
+      - /bin/sh
+      - -c
+      - redis-server --save 20 1 --loglevel warning --requirepass "$${REDIS_PASSWORD}"
+    env_file:
+      - .env
 
 volumes:
   dbdata:
+  cache:
+    driver: local

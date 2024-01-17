@@ -5,6 +5,7 @@ Ce projet contient un environnement Docker paramétré pour les projets Symfony 
 * mysql8.2
 * nginx-alpine
 * adminer
+* redis
 
 ## Installation symfony et api-platform
 À la racine du projet lancez les commandes suivantes :
@@ -24,7 +25,7 @@ Ce projet contient un environnement Docker paramétré pour les projets Symfony 
 * * password : db_user_root_pass
 
 ## Personnalisation
-Vous pouveVous pouvez personnaliser autant que vous le souhaitez les ports de sortie des différentes applications
+Vous pouvez personnaliser autant que vous le souhaitez les ports de sortie des différentes applications
 
 
 
