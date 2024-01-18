@@ -20,6 +20,8 @@ RUN mkdir -p /var/www/app \
     && docker-php-ext-install -j"$(nproc)" intl pdo_mysql \
     && pecl install apcu \
     && docker-php-ext-enable apcu intl \
+    && pecl install redis  \
+    && docker-php-ext-enable redis \
     && apk del .build-deps
 
 WORKDIR /var/www/app
