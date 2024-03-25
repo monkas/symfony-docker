@@ -19,8 +19,8 @@ Si symfony est déjà présent dans le projet passez à l'étape suivante, sinon
 
 ## Installation environnement docker (php, mariadb, nginx, adminer, redis)
 Vérifiez dans un premier temps que les ports utilisés par les différents outils de développement sont disponibles, ensuite à la racine du projet lancez les commandes suivantes :
-* sudo docker-compose build --no-cache
-* sudo docker-compose up -d
+* sudo docker compose build --no-cache
+* sudo docker compose up -d
 
 ## Accès à l'application
 * Pour accèder à l'application : http://localhost

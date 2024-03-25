@@ -1,6 +1,4 @@
-# Override le fichier compose.yaml avec des éléments supplémentaires nécessaires pour l'env de dev
-
-version:  '3.8'
+# override compose.yaml file with dev requirements
 services:
   mysql:
     volumes:
